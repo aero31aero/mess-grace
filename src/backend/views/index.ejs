@@ -1,46 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-  <link href='/css/font-awesome.css' rel='stylesheet' type='text/css'>
-  
-  <link href='/css/mainpage.css' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="/css/sweetalert2.min.css">
-  <script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>
-  <script type="text/javascript" src="/js/sweetalert2.min.js"></script>
-  <script type="text/javascript" src="/js/calendar.js"></script>
-  <title>Saving Grace</title>
-</head>
-<body style="margin-top: 100px">
-      
-
-  <header>
-<% include ./navbar.ejs %>
-  </header>
-  <div id = "rules">
-    <h2>Rules for putting grace :</h2>
-    <ul id="rules_list">
-      <li>You cannot put grace on more than 4 days in a month</li>
-      <li>You cannot put grace on more than 2 consecutive days</li>
-    </ul>
-  </div>
-    <div id="front" >
-      <div id = "calendarContainer">
-        <div id="calendar">
-          <div id="calendar_header"><i class="icon-chevron-left"></i>
-              <h1></h1><i class="icon-chevron-right"></i>
-          </div>
-          <div id="calendar_weekdays"></div>
-          <div id="calendar_content"></div>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/mdDateTimePicker.css">
+    <link rel="stylesheet" href="/css/w3.css">
+    <link href="/css/index.css" rel="stylesheet" type="text/css">
+    <script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="/js/polyfill.js"></script>
+    <script src="/js/rome.js"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/js/platform.js" async defer></script>
+    <script src="/js/scroll-into-view-if-needed.min.js"></script>
+    <script src="/js/draggabilly.pkgd.min.js"></script>
+    <script src="/js/mdDateTimePicker.js"></script>
+    <script src="/js/network.js"></script>
+    <script src="/js/index.js"></script>
+    <title>Saving Grace</title>
+  </head>
+  <body>
+    <header id="header">
+      <div class="container">
+        <h1>Saving Grace</h1>
+        <nav id="nav">
+          <ul>
+            <li>
+              <a href="#">Help</a>
+            </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Logout</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      <div class="container">
+        <div id="login">
+          <div class="g-signin2" data-width="300" data-height="200" data-longtitle="true"></div>
         </div>
+        <div id="main">
+          <ul id="grace-list" class="w3-ul w3-card-4 w3-teal w3-center"></ul>
+          <p class="w3-btn w3-white w3-card-4 w3-hover-teal w3-padding-16" id="markgrace" onclick="app.markGrace()">
+            <span class="material-icon">Mark Grace</span>
+          </p>
+          <p class="w3-btn w3-white w3-card-4 w3-hover-red w3-padding-16" id="markgrace" onclick="">
+            <span class="material-icon">Logout</span>
+          </p>
+        </div>
+        <div id="help"></div>
+        <div id="about"></div>
       </div>
     </div>
-<footer>
-
-</footer>
-</body>
+  </body>
 </html>
