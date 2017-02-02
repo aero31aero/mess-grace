@@ -3,6 +3,9 @@ var bcrypt = require('bcryptjs');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var user = require('../db_schema/user_schema');
+var gracerules = require('../config/gracerules');
+
+
 var router = express.Router();
 require('../config/passport')(passport);
 
@@ -58,6 +61,28 @@ router.get('/dashboard', function(req, res){
     res.send("under construction come back later!");
 });
 
+//grace date
+router.get('/addgrace', function(req, res){
+    date = req.query.date
+    user.findOne({'google.name':req.session.user}).exec(function(err, username){
+        var gracetest = gracerules(date,username.grace.date)
+        if(gracetest !== true){
+            console.log("Grace Error:",gracetest);
+            res.status(200).send("errrror");
+            return;
+        }
+        username.grace.date.push(date);
+        username.save(function(err, saveduser){
+            if(err){console.log(err)}
+            else{
+                console.log('grace granted');
+                res.status(200).send('adslfjasl');
+            }
+        })
+    })
+
+    
+});
 router.get('/auth/google',
   passport.authenticate('google',{scope:['profile','email']}));
 

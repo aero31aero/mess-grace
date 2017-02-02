@@ -6,7 +6,7 @@ var network = function() {
 
     var postGrace = function(date, callback) {
         var request = getRequest();
-        request.open("POST", "/addgrace");
+        request.open("GET", "/users/addgrace?date="+date);
         request.setRequestHeader("Content-Type", "application/json");
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {

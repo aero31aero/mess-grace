@@ -16,6 +16,10 @@ var app = function() {
     }
 
     var processGrace = function(date) {
+        date.hours(0);
+        date.minutes(0);
+        date.seconds(0);
+        date.milliseconds(0);
         network.postGrace(date, function(err, response) {
             if (err) {
                 alert("Network Error.");
