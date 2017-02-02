@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var user = require('../db_schema/user_schema');
 var gracerules = require('../config/gracerules');
-
+var moment = require('moment');
 
 var router = express.Router();
 require('../config/passport')(passport);
@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost/messgrace');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.redirect('/calender');
 });
 
 //get request display signup page
@@ -68,7 +68,7 @@ router.get('/addgrace', function(req, res){
         var gracetest = gracerules(date,username.grace.date)
         if(gracetest !== true){
             console.log("Grace Error:",gracetest);
-            res.status(200).send("errrror");
+            res.status(200).json({granted: false});
             return;
         }
         username.grace.date.push(date);
@@ -76,13 +76,41 @@ router.get('/addgrace', function(req, res){
             if(err){console.log(err)}
             else{
                 console.log('grace granted');
-                res.status(200).send('adslfjasl');
+                res.status(200).json({granted: true});
             }
         })
     })
 
     
 });
+
+router.get('/getgrace', function(req, res){
+    user.findOne({'google.name':req.session.user}).exec(function(err, ouruser){
+        gracearray = ouruser.grace.date;
+        res.status(200).json(gracearray);
+    });
+});
+router.get('/removegrace', function(req, res){
+    date = req.query.date;
+     user.findOne({'google.name':req.session.user}).exec(function(err, ouruser){
+        curdate = moment();
+        console.log("DATE:",curdate);
+        curdate.set({hour:0,minute:0,second:0,millisecond:0}).add({days:1});
+        console.log("DATE 2:",curdate);
+        if(curdate.isBefore(moment.unix(date/1000))){
+            ouruser.grace.date.pull(date);
+            ouruser.save(function(err, save){
+                if(err) console.log(err);
+                else{
+                    res.status(200).json({removed:true});
+                }
+            })
+        }
+        else{
+            res.status(200).json({removed:false});
+        }
+    });
+})
 router.get('/auth/google',
   passport.authenticate('google',{scope:['profile','email']}));
 

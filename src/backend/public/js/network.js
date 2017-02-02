@@ -23,7 +23,7 @@ var network = function() {
 
     var getUpcomingGraces = function(callback) {
     	var request = getRequest();
-        request.open("GET", "/getgrace");
+        request.open("GET", "/users/getgrace");
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 callback(null,JSON.parse(request.responseText));

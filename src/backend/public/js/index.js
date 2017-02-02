@@ -15,6 +15,25 @@ var app = function() {
         picker.toggle();
     }
 
+    var loadGrace = function(){
+        network.getUpcomingGraces(function(err, graces) {
+            if (err) {
+                console.log("Network Error.");
+                return;
+            }
+            console.log("GRACES",graces);
+            gracearray = graces;
+            var newarr = [];
+            gracearray.forEach(function(elem){
+                elem = new moment.unix(elem/1000);
+                newarr.push(elem);
+            })
+            gracearray = sortMomentArray(newarr);
+            // gracearray = getUniqueArray(gracearray);
+            renderGraceArray();
+        });
+    }
+
     var processGrace = function(date) {
         date.hours(0);
         date.minutes(0);
@@ -22,26 +41,13 @@ var app = function() {
         date.milliseconds(0);
         network.postGrace(date, function(err, response) {
             if (err) {
-                alert("Network Error.");
+                console.log("Network Error.");
                 return;
             }
-            if (response == true) {
-                alert("Success");
-                network.getUpcomingGraces(function(err, graces) {
-                    if (err) {
-                        alert("Network Error.");
-                        return;
-                    }
-                    gracearray = graces;
-                    // gracearray = sortMomentArray(gracearray);
-                    // gracearray = getUniqueArray(gracearray);
-                    renderGraceArray();
-                });
-                return;
-            } else {
-                alert("Rules Error.");
-                return;
-            }
+            console.log("here");
+            loadGrace();
+            return;
+            
         });
     }
 
@@ -82,5 +88,8 @@ var app = function() {
     return {
         markGrace: markGrace,
         renderGraceArray: renderGraceArray,
+        loadGrace: loadGrace,
     }
 }();
+
+window.onload = app.loadGrace();
