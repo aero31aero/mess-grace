@@ -22,16 +22,13 @@
     <title>Saving Grace</title>
   </head>
   <body>
-    <header id="header">
+    <!-- <header id="header">
       <div class="container">
         <h1>Saving Grace</h1>
         <nav id="nav">
           <ul>
             <li>
-              <a href="#">Help</a>
-            </li>
-            <li>
-              <a href="#"><%= user%></a>
+              <p><%= user%></p>
             </li>
             <li>
               <a href="/users/logout">Logout</a>
@@ -39,24 +36,29 @@
           </ul>
         </nav>
       </div>
-    </header>
+    </header> -->
+    
+      
+      <ul class="w3-navbar w3-black">
+        <li><a href="#">Mess Grace</a></li>
+        <li style="float: right"><a href="/users/logout">Logout</a></li>
+        <li style="float: right"><a href="#">Welcome, <%= user%></a></li>
+      </ul>
+    
     <div class="content">
       <div class="container">
         <div id="login">
           <div class="g-signin2" data-width="300" data-height="200" data-longtitle="true"></div>
         </div>
         <div id="main">
-          <ul id="grace-list" class="w3-ul w3-card-4 w3-teal w3-center"></ul>
-          <p class="w3-btn w3-white w3-card-4 w3-hover-teal w3-padding-16" id="markgrace" onclick="app.markGrace()">
-            <span class="material-icon">Mark Grace</span>
-          </p>
-          <a  style="text-decoration: none;color: black" class="w3-btn w3-white w3-card-4 w3-hover-red w3-padding-16" id="markgrace" onclick="" href="/users/logout">
-            <span class="material-icon">Logout</span>
-          </a>
-        </div>
-        <div id="help"></div>
-        <div id="about"></div>
+        <ul id="grace-list" class="w3-round w3-ul w3-card-4 w3-teal w3-center"></ul>
+        <p class="w3-margin-top w3-round w3-btn w3-white w3-card-4 w3-hover-teal w3-padding-16" id="markgrace" onclick="app.markGrace()">
+          <span class="material-icon">Mark Grace</span>
+        </p>
       </div>
+      <div id="help"></div>
+      <div id="about"></div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
