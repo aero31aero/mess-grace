@@ -112,7 +112,7 @@ body {
   box-shadow: 0 9.6087px 10.78261px 0 rgba(0, 0, 0, 0.17217), 0 13.56522px 30.3913px 0 rgba(0, 0, 0, 0.15043);
 }
 
-@media (max-width: 599px) {
+@media (max-width: 640px) {
   #header .container {
     width: 100%;
   }
@@ -146,5 +146,8 @@ body {
     padding: 10px 3%;
     line-height: 20px;
     border-top: 1px solid #333;
+  }
+  .content{
+    padding-top: 0px;
   }
 }

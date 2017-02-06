@@ -9,7 +9,6 @@ var app = function() {
         });
         picker.trigger = document.getElementById('markgrace');
         $('#markgrace').off().on('onOk', function() {
-            console.log(picker.time);
             processGrace(picker.time);
         });
         picker.toggle();
@@ -18,10 +17,9 @@ var app = function() {
     var loadGrace = function(){
         network.getUpcomingGraces(function(err, graces) {
             if (err) {
-                console.log("Network Error.");
+                console.log("Network Error in Get Grace.");
                 return;
             }
-            console.log("GRACES",graces);
             gracearray = graces;
             var newarr = [];
             gracearray.forEach(function(elem){
@@ -41,10 +39,15 @@ var app = function() {
         date.milliseconds(0);
         network.postGrace(date, function(err, response) {
             if (err) {
-                console.log("Network Error.");
+                console.log("Network Error in Post Grace.");
                 return;
             }
-            console.log("here");
+            if(response.granted){
+                swal("Grace Marked!", "Your grace has been successfully marked!", "success");
+            }
+            else{
+                swal("Error", response.errormessage, "error");
+            }
             loadGrace();
             return;
             

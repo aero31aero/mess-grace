@@ -26,7 +26,7 @@ var network = function() {
         request.open("GET", "/users/getgrace");
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                callback(null,JSON.parse(request.responseText));
+                callback(false,JSON.parse(request.responseText));
                 return;
             }
             else{

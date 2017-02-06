@@ -3,6 +3,16 @@
 //day compare for existence
 module.exports = function(){
 	var moment = require('moment');
+
+	var backdate = function(date){
+		var now = moment();
+		date = moment.unix(date/1000)
+		if(date.isBefore(now)){
+			return false;
+		}
+		return true;
+	}
+
 	var compare = function(date, array){
 		if(array.indexOf(date) == -1){
 			return true;
@@ -33,9 +43,10 @@ module.exports = function(){
 	}
 
 	var test = function(date,array){
-		if(!compare(date,array)) return "Duplicate";
-		if(!consecutive(date,array)) return "Consecutive";
-		if(!limit(date,array)) return "Limit";
+		if(!backdate(date)) return "Well played. Try harder. :)";
+		if(!compare(date,array)) return "You already have a grace marked for this day.";
+		if(!consecutive(date,array)) return "You cannot put more than 2 consecutive graces.";
+		if(!limit(date,array)) return "You can only put 4 graces/month online.";
 		return true;
 	}
 

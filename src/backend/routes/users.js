@@ -68,7 +68,7 @@ router.get('/addgrace', function(req, res){
         var gracetest = gracerules(date,username.grace.date)
         if(gracetest !== true){
             console.log("Grace Error:",gracetest);
-            res.status(200).json({granted: false});
+            res.status(200).json({granted: false, errormessage: gracetest});
             return;
         }
         username.grace.date.push(date);
