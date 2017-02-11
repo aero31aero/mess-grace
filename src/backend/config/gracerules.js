@@ -22,7 +22,36 @@ module.exports = function(){
 	}
 
 	var consecutive= function(date,array){
-		return true;
+		var y1 = false,
+			y2 = false,
+			t1 = false,
+			t2 = false;
+		var day = moment.unix(date/1000);
+		console.log(day);
+		array.forEach(function(elem){
+			console.log(elem);
+			if(elem == day.add(1,'days')){
+				console.log(t1);
+				t1 = true;
+			}else if(elem == day.add(2,'days')){
+				t2 = true;
+				console.log(t2);
+			}else if(elem == day.subtract(1,'days')){
+				y1 = true;
+				console.log(y1);
+			}else if(elem == day.subtract(2,'days')){
+				y2 = true;
+				console.log(y2);
+			}
+		});
+
+		if((t1 == true && t2 == true) || (y1 == true && y2 == true) || (y1 == true && t1 == true)){
+			console.log('consecutive error');
+			return false;
+		}else{
+			console.log('safe to go');
+			return true;
+		}
 	}
 
 	var limit = function(date,array){
@@ -36,7 +65,7 @@ module.exports = function(){
 			}
 			
 		});
-		if(count>=4){
+		if(count>=3){
 				return false;
 		}
 		return true;
@@ -46,7 +75,7 @@ module.exports = function(){
 		if(!backdate(date)) return "Well played. Try harder. :)";
 		if(!compare(date,array)) return "You already have a grace marked for this day.";
 		if(!consecutive(date,array)) return "You cannot put more than 2 consecutive graces.";
-		if(!limit(date,array)) return "You can only put 4 graces/month online.";
+		if(!limit(date,array)) return "You can only put 3 graces/month online.";
 		return true;
 	}
 

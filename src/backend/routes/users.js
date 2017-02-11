@@ -86,8 +86,11 @@ router.get('/addgrace', function(req, res){
 
 router.get('/getgrace', function(req, res){
     user.findOne({'google.name':req.session.user}).exec(function(err, ouruser){
-        gracearray = ouruser.grace.date;
-        res.status(200).json(gracearray);
+        if(err) console.log(err);
+        else{
+            gracearray = ouruser.grace.date;
+            res.status(200).json(gracearray);
+        }
     });
 });
 router.get('/removegrace', function(req, res){
