@@ -22,30 +22,31 @@ module.exports = function(){
 	}
 
 	var consecutive= function(date,array){
-		var y1 = false,
-			y2 = false,
-			t1 = false,
-			t2 = false;
+		var y1 = 0;
+		var	y2 = 0;
+		var	t1 = 0;
+		var	t2 = 0;
 		var day = moment.unix(date/1000);
 		console.log(day);
 		array.forEach(function(elem){
 			console.log(elem);
+			elem = moment.unix(elem/1000);
 			if(elem == day.add(1,'days')){
-				console.log(t1);
-				t1 = true;
+				t1 = 1;
+				console.log('t1'+t1);
 			}else if(elem == day.add(2,'days')){
-				t2 = true;
-				console.log(t2);
+				t2 = 1;
+				console.log('t2'+t2);
 			}else if(elem == day.subtract(1,'days')){
-				y1 = true;
-				console.log(y1);
+				y1 = 1;
+				console.log('y1'+y1);
 			}else if(elem == day.subtract(2,'days')){
-				y2 = true;
-				console.log(y2);
+				y2 = 1;
+				console.log('y2'+y2);
 			}
 		});
 
-		if((t1 == true && t2 == true) || (y1 == true && y2 == true) || (y1 == true && t1 == true)){
+		if((t1 == 1 && t2 == 1) || (y1 == 1 && y2 == 1) || (y1 == 1 && t1 == 1)){
 			console.log('consecutive error');
 			return false;
 		}else{
